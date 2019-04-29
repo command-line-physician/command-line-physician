@@ -16,5 +16,14 @@ describe('test user schema', () => {
     });
     expect(user._tempPassword).toEqual('youllneverguess');
   });
+  it('compares passwords', () => {
+    const user = new UserSchema({
+      email: 'intromode@email.com',
+      password: 'youllneverguess',
+      profilePhoto: 'coolPhoto.jpg'
+    });
 
+    const isSame = user.compare(user.password);
+    expect(isSame).toBeTruthy;
+  });
 });

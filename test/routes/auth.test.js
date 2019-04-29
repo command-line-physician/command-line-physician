@@ -20,6 +20,7 @@ describe('auth routes', () => {
   afterAll(() => {
     return mongoose.connection.close();
   });
+
   it('can sign up a new user', () => {
     return request(app)
       .post('/api/v1/auth/signup')
@@ -35,6 +36,33 @@ describe('auth routes', () => {
             profilePhoto: 'coolPhoto.jpg',
             _id: expect.any(String)
           }, token: expect.any(String)
+        });
+      });
+  });
+
+  it('can sign in a returning user', () => {
+    return User.create({
+      email: 'intromode@email.com',
+      password: 'youllneverguess',
+      profilePhoto: 'coolPhoto.jpg'
+    })
+      .then(() => {
+        return request(app)
+          .post('/api/v1/auth/signin')
+          .send({
+            email: 'intromode@email.com',
+            password: 'youllneverguess',
+            profilePhoto: 'coolPhoto.jpg'
+          });
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          user: {
+            email: 'intromode@email.com',
+            profilePhoto: 'coolPhoto.jpg',
+            _id: expect.any(String)
+          },
+          token: expect.any(String)
         });
       });
   });

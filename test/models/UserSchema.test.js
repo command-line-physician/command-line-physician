@@ -14,5 +14,7 @@ describe('test user schema', () => {
       profilePhoto: 'coolPhoto.jpg',
       _id: expect.any(mongoose.Types.ObjectId)
     });
+    expect(user._tempPassword).toEqual('youllneverguess');
   });
+
 });

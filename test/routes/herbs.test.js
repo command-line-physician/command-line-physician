@@ -182,4 +182,57 @@ describe('herb routes', () => {
         });
       });
   });
+  it('updates an herb by signed in user', () => {
+    let token = null;
+    let userId = null;
+
+    return request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        email: 'intromode@email.com',
+        password: 'youllneverguess',
+        profilePhoto: 'coolPhoto.jpg'
+      })
+      .then(res => {
+        token = res.body.token;
+        userId = res.body.user._id;
+
+        return request(app)
+          .post('/api/v1/herbs')
+          .set('Authorization', `Bearer ${token}`)
+          .send({
+            name: 'lobelia',
+            category: 'nervine & antispasmodic',
+            latin_name: 'lobelia inflata',
+            medicinal_uses: 'cures everything',
+            description: 'is a smart herb',
+            user: userId
+          });
+      })
+      .then(herb => {
+        return request(app)
+          .patch(`/api/v1/herbs/${herb.body._id}`)
+          .set('Authorization', `Bearer ${token}`)
+          .send({
+            name: 'lobellia',
+            category: 'sweat',
+            latin_name: 'fhdjshfk',
+            medicinal_uses: 'all things',
+            description: 'does all the things',
+            user: userId
+          });
+
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          name: 'lobellia',
+          category: 'sweat',
+          latin_name: 'fhdjshfk',
+          medicinal_uses: 'all things',
+          description: 'does all the things',
+          user: userId,
+          _id: expect.any(String)
+        });
+      });
+  });
 });

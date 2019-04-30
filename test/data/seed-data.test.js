@@ -1,4 +1,3 @@
-const Herb = require('../../lib/models/herbSchema');
 const request = require('supertest');
 const app = require('../../lib/app');
 const seedData = require('../../lib/data/seed-data');

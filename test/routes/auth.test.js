@@ -1,4 +1,18 @@
-require('dotenv').config();
+beforeAll(() => {
+  return mongoose.connect('mongodb://localhost:27017/herbs', {
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useNewUrlParser: true
+  });
+});
+
+beforeEach(() => {
+  return mongoose.connection.dropDatabase();
+});
+
+afterAll(() => {
+  return mongoose.connection.close();
+});require('dotenv').config();
 const request = require('supertest');
 const mongoose = require('mongoose');
 const app = require('../../lib/app');

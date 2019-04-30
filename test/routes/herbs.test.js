@@ -1,7 +1,6 @@
 const app = require('../../lib/app');
 const request = require('supertest');
 const mongoose = require('mongoose');
-const User = require('../../lib/models/userSchema');
 
 describe('herb routes', () => {
   beforeAll(() => {

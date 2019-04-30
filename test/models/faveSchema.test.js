@@ -15,4 +15,12 @@ describe('tests fave schema', () => {
       _id: expect.any(mongoose.Types.ObjectId)
     });
   });
+  it('has required fields', () => {
+    const fave = new Fave({
+
+    });
+    const errors = fave.validateSync().errors;
+    expect(errors.user.message).toEqual('Path `user` is required.');
+    expect(errors.herb.message).toEqual('Path `herb` is required.');
+  });
 });

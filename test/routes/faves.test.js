@@ -130,6 +130,42 @@ describe('faves routes', () => {
       .then(res => {
         expect(res.body).toHaveLength(2);
       });
+  });
+  it('can delete a favorite', async() => {
+    let token = null;
+    let userId = null;
 
+    const testerHerb = await getHerb();
+    
+    return request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        email: 'intromode@email.com',
+        password: 'youllneverguess',
+        profilePhoto: 'coolPhoto.jpg'
+      })
+      .then(user => {
+        token = user.body.token;
+        userId = user.body.user._id;
+        return request(app)
+          .post('/api/v1/faves')
+          .set('Authorization', `Bearer ${token}`)
+          .send({
+            user: userId,
+            herb: testerHerb
+          });
+      })
+      .then(fave => {
+        return request(app)
+          .delete(`/api/v1/faves/${fave.body._id}`)
+          .set('Authorization', `Bearer ${token}`)
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          user: expect.any(String),
+          herb: expect.any(String),
+          _id: expect.any(String)
+        });
+      });
   });
 });

@@ -21,7 +21,7 @@ describe('seed data populating database', () => {
   });
 
   beforeEach(() => {
-    seedData();
+    return seedData();
   });
 
   it('has all the herbs in the database', () => {

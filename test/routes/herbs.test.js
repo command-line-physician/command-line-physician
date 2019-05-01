@@ -1,6 +1,7 @@
 const app = require('../../lib/app');
 const request = require('supertest');
 const mongoose = require('mongoose');
+const seedData = require('../../lib/data/seed-data');
 
 describe('herb routes', () => {
   beforeAll(() => {
@@ -10,10 +11,15 @@ describe('herb routes', () => {
       useNewUrlParser: true
     });
   });
-  
+
   beforeEach(() => {
     return mongoose.connection.dropDatabase();
   });
+
+  beforeEach(() => {
+    return seedData();
+  });
+
   
   afterAll(() => {
     return mongoose.connection.close();
@@ -26,7 +32,7 @@ describe('herb routes', () => {
     return request(app)
       .post('/api/v1/auth/signup')
       .send({
-        email: 'intromode@email.com',
+        email: 'intromode7@email.com',
         password: 'youllneverguess',
         profilePhoto: 'coolPhoto.jpg'
       })
@@ -67,11 +73,12 @@ describe('herb routes', () => {
     return request(app)
       .post('/api/v1/auth/signup')
       .send({
-        email: 'intromode@email.com',
+        email: 'intromode8@email.com',
         password: 'youllneverguess',
         profilePhoto: 'coolPhoto.jpg'
       })
       .then(res => {
+        console.log(res.body);
         token = res.body.token;
         userId = res.body.user._id;
 
@@ -92,7 +99,7 @@ describe('herb routes', () => {
               .get('/api/v1/herbs');
           })
           .then(res => {
-            expect(res.body).toHaveLength(1);
+            expect(res.body).toHaveLength(23);
           });
       });
   });
@@ -103,7 +110,7 @@ describe('herb routes', () => {
     return request(app)
       .post('/api/v1/auth/signup')
       .send({
-        email: 'intromode@email.com',
+        email: 'intromode9@email.com',
         password: 'youllneverguess',
         profilePhoto: 'coolPhoto.jpg'
       })
@@ -145,7 +152,7 @@ describe('herb routes', () => {
     return request(app)
       .post('/api/v1/auth/signup')
       .send({
-        email: 'intromode@email.com',
+        email: 'intromode10@email.com',
         password: 'youllneverguess',
         profilePhoto: 'coolPhoto.jpg'
       })
@@ -188,7 +195,7 @@ describe('herb routes', () => {
     return request(app)
       .post('/api/v1/auth/signup')
       .send({
-        email: 'intromode@email.com',
+        email: 'intromode11@email.com',
         password: 'youllneverguess',
         profilePhoto: 'coolPhoto.jpg'
       })
@@ -241,7 +248,7 @@ describe('herb routes', () => {
     return request(app)
       .post('/api/v1/auth/signup')
       .send({
-        email: 'intromode@email.com',
+        email: 'intromode12@email.com',
         password: 'youllneverguess',
         profilePhoto: 'coolPhoto.jpg'
       })
@@ -276,6 +283,14 @@ describe('herb routes', () => {
           user: userId,
           _id: expect.any(String)
         });
+      });
+  });
+  it('tests that there are no more than 3 top contribs', () => {
+    return request(app)
+      .get('/api/v1/herbs/top-contributors')
+      .then(res => {
+        console.log(res.body);
+        expect(res.body).toHaveLength(3);
       });
   });
 });

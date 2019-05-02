@@ -1,4 +1,5 @@
 const authHandler = require('./handlers/auth');
+const browseHandler = require('./handlers/browse');
 
-authHandler();
-
+authHandler()
+  .then(() => browseHandler());

@@ -1,6 +1,5 @@
 let token = null;
 
-
 const getToken = () => {
   return token;
 };

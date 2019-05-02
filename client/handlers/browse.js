@@ -35,5 +35,4 @@ module.exports = () => inquirer.prompt([
           return selectedHerb(herb);
         });
     } else process.exit(); 
-  });
-   
+  });                         

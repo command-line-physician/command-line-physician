@@ -1,5 +1,7 @@
 Contributors: Laura, Colin, Phoebe, Mal
 
+Heroku Url: https://command-line-physician.herokuapp.com/
+
 Tech stack:
 Command-line Physician is a RESTful api that utilizes Node, Express, Jest, end-to-end and unit testing. Our testing was carried out by Compass, Robo 3T, and Postman.
 
@@ -14,11 +16,10 @@ Models:
 
   Herb routes:
   - return all herbs
-  - return an herb by latin name/common name
+  - return an herb by latin name/common name && locate stores by herb name
   - create an herb *
   - update an herb *
   - delete an herb *
-  - locate stores by herb name
   - locate locals with specified herb
   - returns a list of top herb database contributors (AGGREGATION)
 

@@ -220,6 +220,7 @@ describe('herb routes', () => {
           .get(`/api/v1/herbs/common-name/${herb.body.name}`);
       })
       .then(res => {
+        console.log(res.body)
         expect(res.body).toEqual({
           herb: { name: 'wormwood',
             category: 'nervine & antispasmodic',

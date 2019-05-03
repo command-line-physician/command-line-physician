@@ -31,7 +31,6 @@ module.exports = () => inquirer.prompt([
         })
         .then((choice) => {
           const { herb } = choice;
-          // console.log(choice);
           return selectedHerb(herb);
         });
     } else process.exit(); 

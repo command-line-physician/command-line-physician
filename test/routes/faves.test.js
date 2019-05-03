@@ -2,7 +2,6 @@ const { getHerb } = require('../../lib/data/data-helpers');
 const app = require('../../lib/app');
 const request = require('supertest');
 const mongoose = require('mongoose');
-const Fave = require('../../lib/models/faveSchema');
 const seedData = require('../../lib/data/seed-data');
 
 describe('faves routes', () => {
@@ -50,6 +49,7 @@ describe('faves routes', () => {
       .then(user => {
         token = user.body.token;
         userId = user.body.user._id;
+        console.log(token, userId);
         return request(app)
           .post('/api/v1/faves')
           .set('Authorization', `Bearer ${token}`)
@@ -158,7 +158,7 @@ describe('faves routes', () => {
       .then(fave => {
         return request(app)
           .delete(`/api/v1/faves/${fave.body._id}`)
-          .set('Authorization', `Bearer ${token}`)
+          .set('Authorization', `Bearer ${token}`);
       })
       .then(res => {
         expect(res.body).toEqual({

@@ -49,7 +49,6 @@ describe('faves routes', () => {
       .then(user => {
         token = user.body.token;
         userId = user.body.user._id;
-        console.log(token, userId);
         return request(app)
           .post('/api/v1/faves')
           .set('Authorization', `Bearer ${token}`)

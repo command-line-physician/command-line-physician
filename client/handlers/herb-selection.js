@@ -1,9 +1,7 @@
-// const inquirer = require('inquirer');
 const request = require('superagent');
 const { getToken } = require('../commons/state');
 const BASE_URL = 'http://localhost:7890/api/v1';
 const chalk = require('chalk');
-// const Herb = require('../../lib/routes/herbs');
 
 module.exports = herbId => {
   return request
@@ -22,6 +20,3 @@ function print(body, field, color) {
   console.log(chalk.underline.bold[color](`${field}:`), chalk[color](body[field]), '\n');
 }
 
-// function titleCase(word) {
-//   return word.slice(0, 1).toUpperCase() + word.slice(1);
-// }

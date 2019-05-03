@@ -221,12 +221,12 @@ describe('herb routes', () => {
       })
       .then(res => {
         expect(res.body).toEqual({
-          herb: { name: 'wormwood',
-            category: 'nervine & antispasmodic',
-            latin_name: 'lobelia inflata',
-            medicinal_uses: 'cures everything',
-            description: 'is a smart herb',
-            user: userId,
+          herb: { name: expect.any(String),
+            category: expect.any(String),
+            latin_name: expect.any(String),
+            medicinal_uses: expect.any(String),
+            description: expect.any(String),
+            user: expect.any(String),
             _id: expect.any(String)
           },
           herbStores: [

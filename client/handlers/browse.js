@@ -17,7 +17,6 @@ module.exports = () => inquirer.prompt([
   browseHerbs
 ])
   .then((choice) => {
-    console.log(choice);
     if(choice.browse === '/herbs') {
       return request
         .get(`${BASE_URL}${choice.browse}`)

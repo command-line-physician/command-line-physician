@@ -6,7 +6,7 @@ const BASE_URL = 'http://localhost:7890/api/v1';
 
 const signUpOrSignin = {
   type: 'list',
-  name: 'authType',
+  name: 'Welcome to the Command Line Physician',
   choices: [
     { name: 'signup', value: '/auth/signup' },
     { name: 'signin', value: '/auth/signin' }

@@ -1,6 +1,5 @@
 language: node_js
-node_js:
-- "node"
+node_js: "node"
 services: mongodb
 env: AUTH_SECRET=M3r5gt MONGODB_URI=mongodb://localhost:27017/herbs 
 GOOGLE_KEY=Je4346j4thuioijhbsDDadredoiweurlkjdgf
